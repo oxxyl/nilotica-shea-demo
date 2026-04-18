@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nilotica Shea · Traceability Command Center</title>
+  <meta name="description" content="Traceability command center for Nilotica Shea Company — shea belt of East Africa. Batch-level provenance, EUDR readiness, quality and certification in one view." />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/vendor/leaflet.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div class="brand-text">
+        <div class="brand-title">Nilotica Shea Co.</div>
+        <div class="brand-sub">Traceability · Northern Uganda</div>
+      </div>
+    </div>
+    <nav class="topbar-nav">
+      <a href="index.html" class="active">Overview</a>
+      <a href="#pipeline-section">Pipeline</a>
+      <a href="#map-section">Sourcing</a>
+      <a href="#batches-section">Batches</a>
+      <a href="#compliance-section">Compliance</a>
+    </nav>
+    <div class="topbar-status">
+      <span class="status-dot"></span>
+      <span id="live-time">— EAT</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- MASTHEAD -->
+  <section class="masthead rise">
+    <div class="masthead-eyebrow">Season 2026 · Operations Dossier</div>
+    <h1>
+      From the <span class="accent">Shea Belt</span>,<br/>
+      traced <span class="ampersand">&amp;</span> <span class="accent">verified</span>.
+    </h1>
+    <p class="masthead-lede">
+      Nilotica Shea Company is a producer company gathering wild-harvested <em>Vitellaria nilotica</em>
+      across eight districts of Northern Uganda. This command center tracks every batch from
+      collection point through export — with EUDR-ready geolocation, certification status, and
+      quality parameters at your fingertips.
+    </p>
+    <div class="masthead-meta">
+      <div class="meta-item">
+        <div class="meta-item-label">Season</div>
+        <div class="meta-item-value">2026 · Active</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-item-label">Districts</div>
+        <div class="meta-item-value">Gulu · Kitgum · Agago · Pader · Lamwo · Amuru · Omoro · Nwoya</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-item-label">Varietal</div>
+        <div class="meta-item-value">Vitellaria nilotica · Wild-harvested</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-item-label">Target Market</div>
+        <div class="meta-item-value">European Union · Cosmetics-grade</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip rise rise-d1">
+    <div class="kpi">
+      <div class="kpi-label">Batches · Season</div>
+      <div class="kpi-value"><span class="counter" id="kpi-batches">0</span></div>
+      <div class="kpi-delta">Active pipeline</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Volume Processed</div>
+      <div class="kpi-value neon"><span class="counter" id="kpi-kg">0</span><span class="unit">kg</span></div>
+      <div class="kpi-delta">Kernels · 2026 season</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Contributing Farmers</div>
+      <div class="kpi-value"><span class="counter" id="kpi-farmers">0</span></div>
+      <div class="kpi-delta muted">Across current batches</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Collection Groups</div>
+      <div class="kpi-value gold"><span class="counter" id="kpi-groups">0</span></div>
+      <div class="kpi-delta muted">Village cooperatives</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">EUDR Readiness</div>
+      <div class="kpi-value neon"><span class="counter" id="kpi-eudr">0</span><span class="unit">%</span></div>
+      <div class="kpi-delta">Compliant batches</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Ready for Dispatch</div>
+      <div class="kpi-value gold"><span class="counter" id="kpi-dispatch">0</span></div>
+      <div class="kpi-delta muted">Batches cleared</div>
+    </div>
+  </div>
+
+  <!-- PIPELINE -->
+  <section class="section" id="pipeline-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-eyebrow">§ 01 · Process Flow</div>
+        <h2 class="section-title">Pipeline <em>stages</em></h2>
+      </div>
+      <div class="section-meta">LIVE · HARVEST → DISPATCH</div>
+    </div>
+    <div class="pipeline" id="pipeline"></div>
+  </section>
+
+  <!-- MAP + CHART GRID -->
+  <section class="section" id="map-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-eyebrow">§ 02 · Geography</div>
+        <h2 class="section-title">Sourcing <em>footprint</em></h2>
+      </div>
+      <div class="section-meta">10 GROUPS · 8 DISTRICTS · 148 FARMERS</div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div id="map"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Volume by district</div>
+          <div class="panel-sub">kg · season</div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="chart-contribution"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BATCHES TABLE -->
+  <section class="section" id="batches-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-eyebrow">§ 03 · Traceability</div>
+        <h2 class="section-title">Batch <em>register</em></h2>
+      </div>
+      <div class="section-meta">SCAN-READY · QR CERTIFIED</div>
+    </div>
+    <div class="panel" style="padding:0;overflow:hidden;">
+      <table class="batch-table">
+        <thead>
+          <tr>
+            <th>Batch ID</th>
+            <th>Harvest</th>
+            <th>Districts</th>
+            <th>Volume</th>
+            <th>Farmers</th>
+            <th>Stage</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="batch-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COMPLIANCE -->
+  <section class="section" id="compliance-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-eyebrow">§ 04 · Compliance</div>
+        <h2 class="section-title">Certifications <em>&amp;</em> quality</h2>
+      </div>
+      <div class="section-meta">EU MARKET ORIENTED</div>
+    </div>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Certification status</div>
+          <div class="panel-sub">Cooperative level</div>
+        </div>
+        <div class="cert-list" id="cert-list"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Quality pass rates</div>
+          <div class="panel-sub">Tested batches · season</div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="chart-qc"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /.container -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-block">
+        <h4>Nilotica Shea Company Ltd.</h4>
+        <p>A producer company sourcing wild-harvested <em>Vitellaria nilotica</em> across Northern Uganda, supplying cosmetic-grade shea butter to European markets under EUDR-ready traceability.</p>
+      </div>
+      <div class="footer-block">
+        <h4>Operations</h4>
+        <a href="#pipeline-section">Pipeline</a>
+        <a href="#map-section">Sourcing</a>
+        <a href="#batches-section">Batches</a>
+      </div>
+      <div class="footer-block">
+        <h4>Compliance</h4>
+        <a href="#compliance-section">Certifications</a>
+        <a href="#compliance-section">Quality Control</a>
+        <a href="#compliance-section">EUDR Readiness</a>
+      </div>
+      <div class="footer-block">
+        <h4>Contact</h4>
+        <p>Gulu, Northern Uganda</p>
+        <a href="mailto:info@example.org">info@example.org</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nilotica Shea Company — traceability platform</span>
+      <span class="demo-tag">DEMO · SYNTHETIC DATA</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/vendor/chart.umd.js"></script>
+<script src="assets/vendor/leaflet.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/dashboard.js"></script>
+</body>
+</html>

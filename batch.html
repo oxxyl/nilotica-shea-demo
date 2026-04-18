@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Batch · Nilotica Shea Traceability</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/vendor/leaflet.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div class="brand-text">
+        <div class="brand-title">Nilotica Shea Co.</div>
+        <div class="brand-sub">Traceability · Northern Uganda</div>
+      </div>
+    </div>
+    <nav class="topbar-nav">
+      <a href="index.html">Overview</a>
+      <a href="index.html#pipeline-section">Pipeline</a>
+      <a href="index.html#batches-section">Batches</a>
+      <a href="index.html#compliance-section">Compliance</a>
+    </nav>
+    <div class="topbar-status">
+      <span class="status-dot"></span>
+      <span>AUTHENTICATED</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- BATCH HERO -->
+  <section class="batch-hero rise">
+    <a href="index.html" class="back-link">Return to command center</a>
+    <div class="batch-hero-id">Batch Dossier · <span id="batch-id">—</span></div>
+    <h1>
+      Provenance <em>record</em> —<br/>
+      <span class="stage-pill" id="batch-stage-label" style="font-size:14px;padding:6px 14px;margin-top:8px;">—</span>
+    </h1>
+
+    <div class="batch-hero-stats">
+      <div>
+        <div class="stat-label">Harvest Date</div>
+        <div class="stat-value" id="stat-harvest">—</div>
+        <div class="stat-sub">Nilotica season</div>
+      </div>
+      <div>
+        <div class="stat-label">Total Volume</div>
+        <div class="stat-value neon"><span id="stat-kg">0</span><span style="font-family:'Space Grotesk';font-size:14px;font-weight:400;color:var(--text-lo);margin-left:6px;">kg</span></div>
+        <div class="stat-sub">Kernels aggregated</div>
+      </div>
+      <div>
+        <div class="stat-label">Contributing Farmers</div>
+        <div class="stat-value gold" id="stat-farmers">0</div>
+        <div class="stat-sub">Women gatherers</div>
+      </div>
+      <div>
+        <div class="stat-label">Collection Groups</div>
+        <div class="stat-value" id="stat-groups">0</div>
+        <div class="stat-sub">Village cooperatives</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGIN & CONTRIBUTORS -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-eyebrow">§ 01 · Origin</div>
+        <h2 class="section-title">Source <em>geography</em></h2>
+      </div>
+      <div class="section-meta">EUDR GEOLOCATION PACKAGE</div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div id="batch-map" style="height:420px;border:1px solid var(--ink-border);"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Contributing groups</div>
+          <div class="panel-sub">With group registrar IDs</div>
+        </div>
+        <div class="group-list" id="group-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLUME BREAKDOWN -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-eyebrow">§ 02 · Contribution ledger</div>
+        <h2 class="section-title">Volume <em>by group</em></h2>
+      </div>
+      <div class="section-meta">PROPORTIONAL DISTRIBUTION</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Kg contributed · proportional estimate</div>
+        <div class="panel-sub">For premium distribution</div>
+      </div>
+      <div class="chart-wrap" style="height:320px;">
+        <canvas id="chart-batch-contribution"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- QC -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-eyebrow">§ 03 · Quality Control</div>
+        <h2 class="section-title">Laboratory <em>results</em></h2>
+      </div>
+      <div class="section-meta" id="qc-meta">—</div>
+    </div>
+    <div class="panel" style="padding:0;overflow:hidden;">
+      <table class="qc-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Measured</th>
+            <th>Limit</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody id="qc-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COMPLIANCE & EUDR -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-eyebrow">§ 04 · Compliance</div>
+        <h2 class="section-title">EUDR <em>&amp;</em> certification</h2>
+      </div>
+      <div class="section-meta">EU MARKET · DUE DILIGENCE</div>
+    </div>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">EUDR readiness</div>
+          <div class="panel-sub">Geolocation package</div>
+        </div>
+        <div class="eudr-list" id="eudr-list"></div>
+        <div style="margin-top:18px;">
+          <div class="panel-sub" style="margin-bottom:8px;">Deforestation risk score</div>
+          <div class="risk-meter">
+            <span class="risk-score" id="risk-score">0.00</span>
+            <div class="risk-bar"><div class="risk-fill" id="risk-fill" style="width:0%"></div></div>
+            <span class="risk-band" id="risk-band">—</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Certifications</div>
+          <div class="panel-sub">This batch</div>
+        </div>
+        <div class="cert-list" id="batch-certs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QR + DESTINATION -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-eyebrow">§ 05 · Chain of custody</div>
+        <h2 class="section-title">Share <em>&amp;</em> verify</h2>
+      </div>
+      <div class="section-meta">CONSUMER-FACING CERTIFICATE</div>
+    </div>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Destination</div>
+          <div class="panel-sub">Buyer or storage</div>
+        </div>
+        <div style="font-family:'Fraunces',serif;font-weight:600;font-size:22px;color:var(--text-hi);margin-bottom:10px;letter-spacing:-0.01em;" id="batch-destination">—</div>
+        <p style="color:var(--text-mid);font-size:13.5px;line-height:1.65;">
+          This dossier is a complete provenance record for the batch above. It is generated
+          automatically from field collection records, laboratory test results, and geolocation
+          data captured at harvest. Scan the QR code to access this record from a mobile device,
+          or share the permanent URL with buyers and auditors.
+        </p>
+      </div>
+      <div class="qr-block">
+        <div class="qr-box" id="qr-target"></div>
+        <div class="qr-caption">Scan to verify this batch</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /.container -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2026 Nilotica Shea Company — traceability platform</span>
+      <span class="demo-tag">DEMO · SYNTHETIC DATA</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/vendor/chart.umd.js"></script>
+<script src="assets/vendor/leaflet.js"></script>
+<script src="assets/vendor/qrcode.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/batch.js"></script>
+</body>
+</html>
