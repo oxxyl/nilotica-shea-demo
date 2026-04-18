@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80">
+  <defs>
+    <radialGradient id="mark" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#00ff88"/>
+      <stop offset="70%" stop-color="#0ba564"/>
+      <stop offset="100%" stop-color="#063a24"/>
+    </radialGradient>
+  </defs>
+  <circle cx="40" cy="40" r="26" fill="url(#mark)"/>
+  <circle cx="40" cy="40" r="15" fill="#050607" stroke="#d4a84a" stroke-width="1.5"/>
+  <text x="80" y="38" font-family="Georgia, 'Fraunces', serif" font-size="22" font-weight="700" fill="#e8ecef" letter-spacing="-0.3">Nilotica Shea Co.</text>
+  <text x="80" y="58" font-family="'Courier New', 'JetBrains Mono', monospace" font-size="10" fill="#00ff88" letter-spacing="4">TRACEABILITY · NORTHERN UGANDA</text>
+</svg>
